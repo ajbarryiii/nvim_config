@@ -6,7 +6,9 @@ lsp.ensure_installed({
   'tsserver',
   'rust_analyzer',
   'ruff',
+  'ruff-lsp',
   'clangd',
+  'ocamllsp',
 })
 
 
