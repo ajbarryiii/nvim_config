@@ -221,8 +221,75 @@ require("lazy").setup({
             vim.cmd("colorscheme catppuccin")
         end,
     },
+    
+    -- Telescope for fuzzy finding
+    {
+    "nvim-telescope/telescope.nvim",
+
+    tag = "0.1.5",
+
+    dependencies = {
+        "nvim-lua/plenary.nvim"
+    },
+
+    config = function()
+        require('telescope').setup({})
+
+        local builtin = require('telescope.builtin')
+        vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
+        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        vim.keymap.set('n', '<leader>pws', function()
+            local word = vim.fn.expand("<cword>")
+            builtin.grep_string({ search = word })
+        end)
+        vim.keymap.set('n', '<leader>pWs', function()
+            local word = vim.fn.expand("<cWORD>")
+            builtin.grep_string({ search = word })
+        end)
+        vim.keymap.set('n', '<leader>ps', function()
+            builtin.grep_string({ search = vim.fn.input("Grep > ") })
+        end)
+        vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+    end
+    },
+    {
+    "folke/zen-mode.nvim",
+    config = function()
+        vim.keymap.set("n", "<leader>zz", function()
+            require("zen-mode").setup {
+                window = {
+                    width = 90,
+                    options = { }
+                },
+            }
+            require("zen-mode").toggle()
+            vim.wo.wrap = false
+            vim.wo.number = true
+            vim.wo.rnu = true
+            ColorMyPencils()
+        end)
+
+
+        vim.keymap.set("n", "<leader>zZ", function()
+            require("zen-mode").setup {
+                window = {
+                    width = 80,
+                    options = { }
+                },
+            }
+            require("zen-mode").toggle()
+            vim.wo.wrap = false
+            vim.wo.number = false
+            vim.wo.rnu = false
+            vim.opt.colorcolumn = "0"
+            ColorMyPencils()
+        end)
+    end
+    },
+    -- Trouble
     {
         "folke/trouble.nvim",
+	lazy = false,
         opts = {}, -- for default options, refer to the configuration section for custom setup.
         cmd = "Trouble",
         keys = {
