@@ -41,8 +41,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-require('lspconfig').ruff.setup({})
+require('lspconfig').ruff_lsp.setup({})
 require('lspconfig').rust_analyzer.setup({})
+require('lspconfig').ocamllsp.setup({})
 require('lspconfig').clangd.setup({})
 
 local cmp = require('cmp')

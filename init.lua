@@ -217,9 +217,6 @@ require("lazy").setup({
         "catppuccin/nvim",
         lazy = false,
         priority = 1000,
-        config = function()
-            vim.cmd("colorscheme catppuccin")
-        end,
     },
     
     -- Telescope for fuzzy finding
@@ -294,7 +291,7 @@ require("lazy").setup({
     },
 })
 
-require("lsp")
+require("lsp_test")
 
 require("cyberdream").setup({
     -- Enable transparent background
@@ -356,3 +353,6 @@ require("cyberdream").setup({
     },
 })
 
+vim.cmd("colorscheme cyberdream")
+vim.api.nvim_set_hl(0, "Cursor", { fg = "yellow", bg = "yellow" })
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "gray" })
