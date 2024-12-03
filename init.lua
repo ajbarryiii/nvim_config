@@ -84,6 +84,7 @@ vim.api.nvim_set_keymap('v', 't', 'j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 's', 'l', { noremap = true, silent = true })
 
 -- Performance and appearance settings
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.updatetime = 300
 vim.opt.timeoutlen = 500
