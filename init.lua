@@ -55,10 +55,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Open tmux sessionizer
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
--- Format code using LSP
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux new tmux-sessionizer<CR>")
 
 -- Navigate quickfix and location lists with centering
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -100,6 +97,11 @@ require("lazy").setup({
     { "neovim/nvim-lspconfig" },
 	-- Null-ls for additional formatting and linting options
     { "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+    {
+       "ThePrimeagen/harpoon",
+       branch = "harpoon2",
+       dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim"},
+    },
     
     -- Autocompletion plugins
     {
@@ -357,3 +359,21 @@ require("cyberdream").setup({
 vim.cmd("colorscheme cyberdream")
 vim.api.nvim_set_hl(0, "Cursor", { fg = "yellow", bg = "yellow" })
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "gray" })
+
+local harpoon = require("harpoon")
+
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<leader>h", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<leader>t", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
