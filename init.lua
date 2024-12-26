@@ -367,9 +367,7 @@ require("cyberdream").setup({
     },
 })
 
-vim.cmd("colorscheme cyberdream")
-vim.api.nvim_set_hl(0, "Cursor", { fg = "yellow", bg = "yellow" })
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "gray" })
+vim.cmd("colorscheme catppuccin-mocha")
 
 local harpoon = require("harpoon")
 
