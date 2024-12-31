@@ -217,7 +217,8 @@ require("lazy").setup({
     },
 
     {
-        "catppuccin/nvim",
+        "rose-pine/neovim",
+	name = "rose-pine",
         lazy = false,
         priority = 1000,
     },
@@ -367,7 +368,7 @@ require("cyberdream").setup({
     },
 })
 
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd("colorscheme rose-pine")
 
 local harpoon = require("harpoon")
 
