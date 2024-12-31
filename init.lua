@@ -80,6 +80,35 @@ vim.api.nvim_set_keymap('v', 'n', 'k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 't', 'j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 's', 'l', { noremap = true, silent = true })
 
+--wrap text with grouping symbol in visual mode;
+
+local function wrap_char_expr()
+  -- Capture the next typed character
+  local open_char = vim.fn.nr2char(vim.fn.getchar())
+
+  -- Map opening characters to their corresponding closing characters
+  local pairs = {
+    ['('] = ')',
+    ['['] = ']',
+    ['{'] = '}',
+    ['"'] = '"',
+    ['`'] = '`',
+    ["'"] = "'",
+  }
+
+  local close_char = pairs[open_char]
+  if close_char then
+    -- If recognized, perform: c <open_char><close_char> <esc> P
+    return 'c' .. open_char .. close_char .. '<esc>P'
+  else
+    -- Otherwise, just fall back to literally pressing 'l' + typed character
+    -- (meaning we do not handle wrapping)
+    return 'l' .. open_char
+  end
+end
+
+vim.keymap.set('x', 'l', wrap_char_expr, { expr = true, noremap = true })
+
 -- Performance and appearance settings
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -387,3 +416,4 @@ vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
