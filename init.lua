@@ -399,6 +399,8 @@ require("cyberdream").setup({
     },
 })
 
+-- Install mason and mason-lspconfig
+
 vim.cmd("colorscheme rose-pine")
 
 local harpoon = require("harpoon")
