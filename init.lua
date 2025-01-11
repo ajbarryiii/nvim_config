@@ -214,7 +214,7 @@ require("lazy").setup({
         run = ":TSUpdate",
         config = function()
             require'nvim-treesitter.configs'.setup {
-                ensure_installed = { "cpp", "python", "lua" },
+                ensure_installed = { "cpp", "python", "lua","rust" },
                 highlight = {
                     enable = true,
                 },
@@ -398,8 +398,6 @@ require("cyberdream").setup({
         ...
     },
 })
-
--- Install mason and mason-lspconfig
 
 vim.cmd("colorscheme rose-pine")
 
