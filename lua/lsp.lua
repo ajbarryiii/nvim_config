@@ -3,10 +3,9 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-  'tsserver',
+  'mojo-lsp-server',
   'rust_analyzer',
   'ruff',
-  'ruff-lsp',
   'clangd',
   'ocamllsp',
 })

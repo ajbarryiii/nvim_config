@@ -2,6 +2,14 @@ vim.opt.updatetime = 800
 
 local lsp_zero = require('lsp-zero')
 
+lsp_zero.ensure_installed({
+  'mojo-lsp-server',
+  'rust_analyzer',
+  'ruff',
+  'clangd',
+  'ocamllsp',
+})
+
 lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
   lsp_zero.highlight_symbol(client, bufnr)
@@ -35,7 +43,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
     vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set({'n', '<leader>f'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+    --vim.keymap.set({'n', '<leader>f'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
   end,
 })

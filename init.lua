@@ -336,6 +336,33 @@ require("lazy").setup({
         },
     },
 })
+-- Filetype detection
+vim.filetype.add({
+    extension = {
+        mojo = "mojo", -- Add the Mojo filetype
+    },
+})
+
+-- Autocommands for Mojo-specific settings
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "mojo",
+    callback = function()
+        -- Use Python syntax highlighting
+        vim.bo.syntax = "python"
+
+        -- Inherit Python-specific formatting settings
+        vim.bo.formatoptions = "croqnl"
+        vim.bo.tabstop = 4
+        vim.bo.shiftwidth = 4
+        vim.bo.softtabstop = 4
+        vim.bo.expandtab = true
+
+        -- Optionally, set Python-style commenting
+        vim.bo.commentstring = "# %s"
+
+        -- Any additional Python-related settings
+    end,
+})
 
 require("lsp_test")
 
