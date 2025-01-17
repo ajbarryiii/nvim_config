@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-require('lspconfig').ruff_lsp.setup({}) 
+require('lspconfig').ruff.setup({}) 
 require('lspconfig').rust_analyzer.setup({})
 require('lspconfig').ocamllsp.setup({})
 require('lspconfig').mojo.setup({})
