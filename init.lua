@@ -173,6 +173,16 @@ require("lazy").setup({
             })
         end,
     },
+    --plugin for markdown rendering
+    {
+	    'MeanderingProgrammer/render-markdown.nvim',
+	    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+	    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+	    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+	    ---@module 'render-markdown'
+	    ---@type render.md.UserConfig
+	    opts = {},
+    },
 
     {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -351,7 +361,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.syntax = "python"
 
         -- Inherit Python-specific formatting settings
-        vim.bo.formatoptions = "croqnl"
+        vim.bo.formatoptions = "python"
         vim.bo.tabstop = 4
         vim.bo.shiftwidth = 4
         vim.bo.softtabstop = 4
