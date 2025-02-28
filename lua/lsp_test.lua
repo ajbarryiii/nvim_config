@@ -8,6 +8,7 @@ lsp_zero.ensure_installed({
   'ruff',
   'clangd',
   'ocamllsp',
+  'sourcekit',
 })
 
 lsp_zero.on_attach(function(client, bufnr)
