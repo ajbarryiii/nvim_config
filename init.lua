@@ -144,34 +144,6 @@ require("lazy").setup({
             "hrsh7th/cmp-vsnip",
             "hrsh7th/vim-vsnip"
         },
-        config = function()
-            require('cmp').setup({
-                sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'buffer' },
-                    { name = 'path' },
-                },
-                snippet = {
-                    expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
-                    end,
-                },
-                mapping = {
-                    ['<C-Space>'] = require('cmp').mapping.complete(),
-                    ['<CR>'] = require('cmp').mapping.confirm({ select = true }),
-                    ['<Tab>'] = require('cmp').mapping(function(fallback)
-                        if require('cmp').visible() then
-                            require('cmp').select_next_item()
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                },
-                window = {
-                    completion = { border = 'rounded', max_height = 20, max_width = 50 }
-                }
-            })
-        end,
     },
     --plugin for markdown rendering
     {
@@ -353,29 +325,6 @@ vim.filetype.add({
     },
 })
 
--- Autocommands for Mojo-specific settings
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "mojo",
-    callback = function()
-        -- Use Python syntax highlighting
-        vim.bo.syntax = "python"
-
-        -- Inherit Python-specific formatting settings
-        vim.bo.formatoptions = "python"
-        vim.bo.tabstop = 4
-        vim.bo.shiftwidth = 4
-        vim.bo.softtabstop = 4
-        vim.bo.expandtab = true
-
-        -- Optionally, set Python-style commenting
-        vim.bo.commentstring = "# %s"
-
-        -- Any additional Python-related settings
-    end,
-})
-
-require("lsp_test")
-
 require("cyberdream").setup({
     -- Enable transparent background
     transparent = true,
@@ -455,4 +404,6 @@ vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+require("lsp_test")
 
