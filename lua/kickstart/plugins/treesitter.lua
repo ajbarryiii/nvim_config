@@ -19,6 +19,7 @@ return {
 				"vimdoc",
 				"cpp",
 				"python",
+				"ocaml",
 				"rust",
 			},
 			-- Autoinstall languages that are not installed
