@@ -9,6 +9,7 @@ return {
 				"bash",
 				"c",
 				"diff",
+				"go",
 				"html",
 				"lua",
 				"luadoc",
@@ -21,6 +22,7 @@ return {
 				"python",
 				"ocaml",
 				"rust",
+				"elixir",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,

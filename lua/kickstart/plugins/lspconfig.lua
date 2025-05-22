@@ -225,7 +225,7 @@ return {
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				clangd = {},
-				-- gopls = {},
+				gopls = {},
 				ruff = {},
 				rust_analyzer = {},
 				ocamllsp = {},
@@ -237,6 +237,7 @@ return {
 				--
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
 				ts_ls = {},
+				elixirls = {},
 				--
 
 				lua_ls = {
