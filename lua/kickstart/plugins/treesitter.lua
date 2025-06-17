@@ -23,6 +23,7 @@ return {
 				"ocaml",
 				"rust",
 				"elixir",
+				"zig",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
