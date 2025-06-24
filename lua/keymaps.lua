@@ -24,11 +24,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Yank to system clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Delete without overwriting register
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Map <C-c> as an escape alternative
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -48,56 +48,53 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- Replace word under cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- Reload Neovim configuration
-vim.keymap.set("n", "<leader><leader>", function() vim.cmd("so") end)
-
 -- Key remappings for normal and visual modes (swap 'j', 'k', 'l' with 't', 'n', 's')
-vim.api.nvim_set_keymap('n', 'n', 'k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 't', 'j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 's', 'l', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'n', 'k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 't', 'j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 's', 'l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "n", "k", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "t", "j", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "s", "l", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "n", "k", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "t", "j", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "s", "l", { noremap = true, silent = true })
 
 --wrap text with grouping symbol in visual mode;
 
 local function wrap_char_expr()
-  -- Capture the next typed character
-  local open_char = vim.fn.nr2char(vim.fn.getchar())
+	-- Capture the next typed character
+	local open_char = vim.fn.nr2char(vim.fn.getchar())
 
-  -- Map opening characters to their corresponding closing characters
-  local pairs = {
-    ['('] = ')',
-    ['['] = ']',
-    ['{'] = '}',
-    ['<'] = '>',
-    ['"'] = '"',
-    ['`'] = '`',
-    ["'"] = "'",
-  }
+	-- Map opening characters to their corresponding closing characters
+	local pairs = {
+		["("] = ")",
+		["["] = "]",
+		["{"] = "}",
+		["<"] = ">",
+		['"'] = '"',
+		["`"] = "`",
+		["'"] = "'",
+	}
 
-  local close_char = pairs[open_char]
-  if close_char then
-    -- If recognized, perform: c <open_char><close_char> <esc> P
-    return 'c' .. open_char .. close_char .. '<esc>P'
-  else
-    -- Otherwise, just fall back to literally pressing 'l' + typed character
-    -- (meaning we do not handle wrapping)
-    return 'l' .. open_char
-  end
+	local close_char = pairs[open_char]
+	if close_char then
+		-- If recognized, perform: c <open_char><close_char> <esc> P
+		return "c" .. open_char .. close_char .. "<esc>P"
+	else
+		-- Otherwise, just fall back to literally pressing 'l' + typed character
+		-- (meaning we do not handle wrapping)
+		return "l" .. open_char
+	end
 end
 
-vim.keymap.set('x', 'l', wrap_char_expr, { expr = true, noremap = true })
+vim.keymap.set("x", "l", wrap_char_expr, { expr = true, noremap = true })
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -105,7 +102,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -117,10 +114,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -128,12 +125,12 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 -- vim: ts=2 sts=2 sw=2 et
